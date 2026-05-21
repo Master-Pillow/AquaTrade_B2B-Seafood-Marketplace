@@ -85,7 +85,7 @@ const LandingPage = () => {
       {/* ================= SIDEBAR ================= */}
       <aside className="w-64 bg-[#0a192f] text-white flex flex-col shrink-0">
         <nav className="flex-1 px-4 py-6 space-y-2">
-          <NavItem icon={<Home size={20} />} label="Trang chủ" active onClick={() => navigate('/')} />
+          <NavItem icon={<Home size={20} />} label="Trang chủ" active onClick={() => navigate('/home')} />
           <NavItem icon={<ArrowRightLeft size={20} />} label="Sàn Giao dịch" onClick={() => navigate('/exchange')} />
           <div className="border-t border-gray-700 mt-4 pt-4">
             <NavItem icon={<Navigation size={20} />} label="Theo dõi xe" badge="Mới" onClick={() => navigate('/route-optimization')} />

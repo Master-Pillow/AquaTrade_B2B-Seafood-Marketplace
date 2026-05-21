@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
     Truck, PiggyBank, TrendingUp, Package, ChevronDown,
     MapPin, ArrowDown, ArrowUp, Printer, CheckCircle2, Zap, Cpu,
-    Home, ArrowRightLeft, Navigation, Search, Bell // Import thêm icon cho layout
+    Home, ArrowRightLeft, Navigation, Search, Bell, LayoutDashboard
 } from "lucide-react";
 import {
     ResponsiveContainer, BarChart, Bar, XAxis, YAxis,
@@ -504,10 +504,10 @@ export default function RouteOptimizationResult() {
             {/* ================= SIDEBAR (Đồng bộ với Exchange) ================= */}
             <aside className="w-64 bg-[#0a192f] text-white flex flex-col shrink-0 z-10">
                 <nav className="flex-1 px-4 py-6 space-y-2">
-                    <NavItem icon={<Home size={20} />} label="Trang chủ" onClick={() => navigate('/')} />
+                    <NavItem icon={<Home size={20} />} label="Trang chủ" onClick={() => navigate('/home')} />
                     <NavItem icon={<ArrowRightLeft size={20} />} label="Sàn Giao dịch" onClick={() => navigate('/exchange')} />
                     <div className="border-t border-gray-700 mt-4 pt-4">
-                        <NavItem icon={<Navigation size={20} />} label="Theo dõi xe" badge="Mới" active />
+                        <NavItem icon={<Navigation size={20} />} label="Theo dõi xe" badge="Mới" active onClick={() => navigate('/route-optimization')} />
                     </div>
                 </nav>
             </aside>
@@ -551,6 +551,16 @@ export default function RouteOptimizationResult() {
                             </div>
                         </div>
 
+                        {/* BẢN ĐỒ CHIẾN LƯỢC TỔNG QUAN (ROUTE MAP) */}
+                        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                                <h3 className="font-bold text-[15px] text-gray-900">Bản Đồ Lộ Trình Vận Chuyển Tổng Quan</h3>
+                                <span className="text-[12px] font-mono text-teal-600 bg-teal-50 px-2 py-1 rounded-full">Trực tuyến</span>
+                            </div>
+                            <iframe src="/route-map.html" className="w-full h-[600px] border-none" title="Route Optimization Map"></iframe>
+                        </div>
+
+
                         {/* Stat Cards */}
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                             <StatCard icon={Truck} label="Số chuyến xe tối ưu" value={routeStats.totalRoutes} accent="bg-blue-500" sub="Tuyến đường gom xe" delay="0ms" />
@@ -584,8 +594,14 @@ export default function RouteOptimizationResult() {
                             </div>
                         </div>
 
-                        {/* Chart */}
-                        <ChartSection hoveredLotId={hoveredLotId} setHoveredLotId={setHoveredLotId} />
+                        {/* Map Section */}
+                        <div className="mt-8 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                          <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                            <h3 className="font-bold text-[15px] text-gray-900">Bản Đồ Lộ Trình Vận Chuyển & Phân Phối (MILP)</h3>
+                            <span className="text-[12px] font-mono text-teal-600 bg-teal-50 px-2 py-1 rounded-full">Trực tuyến</span>
+                          </div>
+                          <iframe src="/route-map.html" className="w-full h-[600px] border-none" title="Route Optimization Map"></iframe>
+                        </div>
 
                         {/* Footer */}
                         <p className="text-center text-xs text-slate-300 pb-4">

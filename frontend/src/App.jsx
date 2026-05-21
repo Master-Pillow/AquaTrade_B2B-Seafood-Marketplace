@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Outlet, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Outlet, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion'; // <-- Cập nhật import motion
 import { 
   Fish, LayoutDashboard, BarChart3, ArrowRightLeft, Users, Package, 
@@ -191,7 +191,7 @@ const AnimatedRoutes = () => {
         <Route path="/verify-otp" element={<PageTransition><OtpPage /></PageTransition>} />
 
         {/* Main Application Pages */}
-        <Route path="/" element={<PageTransition><LandingPage /></PageTransition>} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<PageTransition><LandingPage /></PageTransition>} />
         <Route path="/exchange" element={<PageTransition><Exchange /></PageTransition>} />
         <Route path="/listing-criteria" element={<PageTransition><ListingCriteria /></PageTransition>} />

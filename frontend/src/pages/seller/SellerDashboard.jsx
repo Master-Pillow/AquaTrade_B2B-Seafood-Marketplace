@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Fish, Bell, LayoutDashboard, Package, PlusCircle,
   TrendingUp, ScrollText, Star, Building2, FileText,
-  MapPin, ImagePlus, FileCheck
+  MapPin, ImagePlus, FileCheck, Home, ArrowRightLeft, Navigation
 } from 'lucide-react';
 import BrandLogo from '../../assets/images/logo/brand.png';
 
@@ -33,8 +33,12 @@ const SellerDashboard = () => {
         </div>
 
         <nav className="flex-1 px-3 space-y-0.5 pb-4">
+          <NavSection label="Điều hướng chính" />
+          <NavItem icon={<LayoutDashboard size={16} />} label="Trang chủ" active onClick={() => navigate('/seller')} />
+          <NavItem icon={<ArrowRightLeft size={16} />} label="Sàn giao dịch" onClick={() => navigate('/exchange')} />
+          <NavItem icon={<Navigation size={16} />} label="Theo dõi xe" badge="Mới" badgeColor="bg-orange-500" onClick={() => navigate('/route-optimization')} />
+
           <NavSection label="Quản Lý Lô Hàng" />
-          <NavItem icon={<LayoutDashboard size={16} />} label="Tổng quan" active />
           <NavItem icon={<Package size={16} />} label="Lô hàng của tôi" badge="8" badgeColor="bg-teal-500" />
           {/* <NavItem icon={<PlusCircle size={16} />} label="Đăng lô hàng mới" /> */}
 
@@ -257,8 +261,8 @@ const SellerDashboard = () => {
 
 // SUB-COMPONENTS
 const NavSection = ({ label }) => <p className="px-3 text-[9px] font-mono text-gray-500 uppercase tracking-widest pt-4 pb-2">{label}</p>;
-const NavItem = ({ icon, label, active, badge, badgeColor }) => (
-  <a href="#" className={`flex items-center px-3 py-2.5 rounded-lg text-[13.5px] transition ${active ? 'bg-teal-900/40 text-teal-400 border border-teal-500/30' : 'hover:bg-gray-800 text-gray-400 hover:text-white'}`}>
+const NavItem = ({ icon, label, active, badge, badgeColor, onClick }) => (
+  <a href="#" onClick={(e) => { e.preventDefault(); if(onClick) onClick(); }} className={`flex items-center px-3 py-2.5 rounded-lg text-[13.5px] transition ${active ? 'bg-teal-900/40 text-teal-400 border border-teal-500/30' : 'hover:bg-gray-800 text-gray-400 hover:text-white'}`}>
     <span className="mr-3 opacity-80">{icon}</span>
     <span className="flex-1">{label}</span>
     {badge && <span className={`${badgeColor} text-white font-mono text-[9px] px-1.5 py-0.5 rounded-full`}>{badge}</span>}

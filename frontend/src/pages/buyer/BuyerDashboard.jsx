@@ -4,8 +4,9 @@ import {
   Search, Bell, User, ArrowUpDown, List, Grid,
   MapPin, FileCheck, Lock, Building2, Calendar,
   FileText, Phone, ChevronDown, Play, Box,
-  X, Paperclip, Sparkles // Import thêm các icon này cho Modal
+  X, Paperclip, Sparkles, Home, ArrowRightLeft, Navigation, LayoutDashboard
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import shrimp_head_main from '../../assets/images/productimg/dau-tom-su-dong-lanh.jpg';
 import pangasius_powder_main from '../../assets/images/productimg/bot-ca-tra.jpg';
@@ -18,6 +19,7 @@ const placeholderImage = 'https://via.placeholder.com/600x600?text=Ảnh+Sản+P
 const shrimp_shell_main = 'https://via.placeholder.com/600x600/fff3e0/e65100?text=Vỏ+Tôm+Sú';
 
 const BuyerDashboard = () => {
+  const navigate = useNavigate();
   // 1. DỮ LIỆU ĐỘNG (MOCK DATA)
   const mockLots = [
     {
@@ -225,10 +227,13 @@ const BuyerDashboard = () => {
       {/* SIDEBAR */}
       <aside className="w-60 bg-[#0a192f] text-white flex flex-col shrink-0">
         <nav className="flex-1 px-4 py-6 space-y-1">
-          <NavItem label="Sàn giao dịch" active icon={<Store size={16} />} />
+          <NavItem label="Trang chủ" active icon={<LayoutDashboard size={16} />} onClick={() => navigate('/buyer')} />
+          <NavItem label="Sàn giao dịch" icon={<ArrowRightLeft size={16} />} onClick={() => navigate('/exchange')} />
+          <NavItem label="Theo dõi xe" badge="Mới" icon={<Navigation size={16} />} onClick={() => navigate('/route-optimization')} />
+          
+          <p className="px-4 text-[10px] text-gray-500 uppercase font-bold py-2 mt-6">Cá nhân</p>
           <NavItem label="Đơn hàng của tôi" badge="3" icon={<ShoppingCart size={16} />} />
           <NavItem label="Chi tiêu & Ngân sách" icon={<Wallet size={16} />} />
-          <p className="px-4 text-[10px] text-gray-500 uppercase font-bold py-2 mt-6">Theo dõi</p>
           <NavItem label="Lô hàng yêu thích" icon={<Heart size={16} />} />
           <NavItem label="Thông báo giá" icon={<BellRing size={16} />} />
         </nav>
@@ -666,8 +671,8 @@ const SelectFilter = ({ options }) => (
   </select>
 );
 
-const NavItem = ({ label, active, badge, icon }) => (
-  <a href="#" className={`flex items-center px-4 py-2.5 rounded-lg transition ${active ? 'bg-teal-500 text-white shadow-md font-bold' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}>
+const NavItem = ({ label, active, badge, icon, onClick }) => (
+  <a href="#" onClick={(e) => { e.preventDefault(); if(onClick) onClick(); }} className={`flex items-center px-4 py-2.5 rounded-lg transition ${active ? 'bg-teal-500 text-white shadow-md font-bold' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}>
     <span className={`mr-3 ${active ? 'opacity-100' : 'opacity-80'}`}>{icon}</span>
     <span className="flex-1 text-sm">{label}</span>
     {badge && <span className={`${active ? 'bg-white text-teal-600' : 'bg-orange-500 text-white'} text-[9px] font-bold px-2 py-0.5 rounded-full`}>{badge}</span>}

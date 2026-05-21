@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import {
   Fish, Home, ArrowRightLeft, Truck, User, LifeBuoy,
   Navigation, Search, AlertTriangle, MoreVertical, MapPin,
   Package, Scale, FolderOpen, CheckCircle2, XCircle, X, ChevronRight
 } from 'lucide-react';
-import mapImg from '../assets/images/map/map-dong-bang-song-cu-long.png';
 import BrandLogo from '../assets/images/logo/brand.png';
 
 const Exchange = () => {
@@ -15,25 +14,16 @@ const Exchange = () => {
   // STATE điều khiển Modal chi tiết
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-  // === Dữ liệu Bản đồ ===
-  const locations = [
-    { type: 'processing', x: 20, y: 72, label: 'Cà Mau' },
-    { type: 'coldstorage', x: 36.5, y: 69, label: 'Hub Bạc Liêu' },
-    { type: 'processing', x: 12, y: 76, label: 'Phú Tân' },
-    { type: 'coldstorage', x: 37, y: 44, label: 'Cần Thơ' },
-    { type: 'consumption', x: 64, y: 29, label: 'Long An' },
-    { type: 'coldstorage', x: 45, y: 55, label: '' },
-    { type: 'consumption', x: 55, y: 38, label: '' },
+  // === Dữ liệu Biểu đồ Giao dịch ===
+  const tradingData = [
+    { date: '15/09', buyVolume: 4200, sellVolume: 3800, avgPrice: 125 },
+    { date: '16/09', buyVolume: 3900, sellVolume: 4100, avgPrice: 122 },
+    { date: '17/09', buyVolume: 5100, sellVolume: 4500, avgPrice: 128 },
+    { date: '18/09', buyVolume: 4800, sellVolume: 5200, avgPrice: 130 },
+    { date: '19/09', buyVolume: 5500, sellVolume: 5000, avgPrice: 135 },
+    { date: '20/09', buyVolume: 6000, sellVolume: 5800, avgPrice: 138 },
+    { date: '21/09', buyVolume: 6500, sellVolume: 6200, avgPrice: 142 },
   ];
-
-  const routes = [
-    { points: [locations[0], locations[1], locations[3]], color: 'text-blue-700' },
-    { points: [locations[2], locations[5], locations[6], locations[4]], color: 'text-green-600' },
-  ];
-
-  const getPathData = (points) => {
-    return points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-  };
 
   return (
     <div className="flex h-screen bg-gray-50 font-sans text-gray-800 relative">
@@ -43,31 +33,12 @@ const Exchange = () => {
 
 
         <nav className="flex-1 px-4 py-6 space-y-2">
-          <NavItem icon={<Home size={20} />} label="Trang chủ" onClick={() => navigate('/')} />
-          <NavItem icon={<ArrowRightLeft size={20} />} label="Sàn Giao dịch" active />
-
+          <NavItem icon={<Home size={20} />} label="Trang chủ" onClick={() => navigate('/home')} />
+          <NavItem icon={<ArrowRightLeft size={20} />} label="Sàn Giao dịch" active onClick={() => navigate('/exchange')} />
           <div className="border-t border-gray-700 mt-4 pt-4">
             <NavItem icon={<Navigation size={20} />} label="Theo dõi xe" badge="Mới" onClick={() => navigate('/route-optimization')} />
           </div>
         </nav>
-
-        <div className="p-4 bg-[#0d213f] m-4 rounded-lg">
-          <h3 className="text-sm font-semibold mb-4">Công cụ ra quyết định</h3>
-          <div className="space-y-4 text-sm">
-            <Slider label="Hệ số tươi" value="1.00" />
-            <Slider label="Tải trọng xe" value="100" />
-            <Slider label="Phí vận hành" value="0.08" />
-            <div className="flex items-center justify-between mt-2">
-              <span className="text-gray-300">Cùng, cáp trời</span>
-              <div className="w-8 h-4 bg-gray-500 rounded-full flex items-center px-1">
-                <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-              </div>
-            </div>
-            <button className="w-full mt-4 bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition">
-              Theo dõi xe
-            </button>
-          </div>
-        </div>
       </aside>
 
       {/* ================= MAIN CONTENT ================= */}
@@ -118,20 +89,50 @@ const Exchange = () => {
           </section>
 
 
-          <div className="mt-8 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+          {/* Biểu đồ Thị trường */}
+          <div className="grid grid-cols-2 gap-6">
             
-            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-              <button
-                    onClick={() => navigate('/route-optimization')}
-                    className="flex items-center gap-1 bg-teal-50 text-teal-700 hover:bg-teal-100 border border-teal-200 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
-                  >
-                    Xem chi tiết <ChevronRight size={14} />
-                  </button>
-              <h3 className="font-bold text-[15px] text-gray-900">Bản Đồ Lộ Trình Vận Chuyển & Phân Phối (MILP)</h3>
-              <span className="text-[12px] font-mono text-teal-600 bg-teal-50 px-2 py-1 rounded-full">Trực tuyến</span>
+            {/* Biểu đồ Khối lượng */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <div className="mb-4">
+                <h3 className="font-bold text-gray-800 text-sm">Khối lượng Giao dịch (Tấn)</h3>
+                <p className="text-xs text-gray-500">7 ngày gần nhất</p>
+              </div>
+              <div className="h-[300px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={tradingData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
+                    <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#6b7280' }} dy={10} />
+                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#6b7280' }} />
+                    <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                    <Line type="monotone" dataKey="buyVolume" name="Khối lượng Mua" stroke="#0ea5e9" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                    <Line type="monotone" dataKey="sellVolume" name="Khối lượng Bán" stroke="#10b981" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
             </div>
-            <iframe src="/route-map.html" className="w-full h-[600px] border-none" title="Route Optimization Map"></iframe>
-            
+
+            {/* Biểu đồ Giá trị */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <div className="mb-4">
+                <h3 className="font-bold text-gray-800 text-sm">Giá trị Giao dịch Trung bình (Triệu VNĐ/Tấn)</h3>
+                <p className="text-xs text-gray-500">7 ngày gần nhất</p>
+              </div>
+              <div className="h-[300px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={tradingData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
+                    <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#6b7280' }} dy={10} />
+                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#6b7280' }} domain={['dataMin - 5', 'dataMax + 5']} />
+                    <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                    <Line type="monotone" dataKey="avgPrice" name="Giá TB" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
           </div>
 
 
@@ -319,66 +320,7 @@ const ModalKpiCard = ({ title, value, icon, color }) => (
   </div>
 );
 
-const Legend = ({ position }) => {
-  const legendItems = [
-    { color: 'bg-red-500', label: 'Nhà máy chế biến' },
-    { color: 'bg-blue-500', label: 'Kho tập kết lạnh' },
-    { color: 'bg-green-500', label: 'Nhà máy tiêu thụ' },
-  ];
-  return (
-    <div className={`absolute p-2 bg-white/95 backdrop-blur-sm border border-gray-200 rounded shadow-sm ${position} z-10 pointer-events-none`}>
-      <div className="space-y-1">
-        {legendItems.map((item, index) => (
-          <div key={index} className="flex items-center space-x-1.5">
-            <div className={`w-2.5 h-2.5 rounded-full ${item.color}`}></div>
-            <span className="text-[10px] text-gray-700 font-medium">{item.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
-const Marker = ({ type, x, y, label, scale = 1 }) => {
-  const colors = {
-    processing: 'border-red-500 bg-white text-red-500',
-    coldstorage: 'border-blue-500 bg-white text-blue-500',
-    consumption: 'border-green-500 bg-white text-green-500',
-  };
-  const inverseScale = 1 / scale;
-
-  return (
-    <div
-      className="absolute flex flex-col items-center group z-20"
-      style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%, -100%) scale(${inverseScale})` }}
-    >
-      <div className={`flex items-center justify-center p-0.5 border-2 rounded-full shadow-sm ${colors[type]} group-hover:scale-110 transition-transform cursor-pointer`}>
-        <MapPin size={14} fill="currentColor" />
-      </div>
-      {label && <span className="mt-0.5 px-1 py-0.5 text-[10px] font-bold text-gray-800 bg-white/90 border border-gray-100 rounded shadow-sm whitespace-nowrap">{label}</span>}
-    </div>
-  );
-};
-
-const InfoLabel = ({ x, y, title, color, scale = 1, children }) => {
-  const inverseScale = 1 / scale;
-
-  return (
-    <div
-      className="absolute group z-20 hover:z-50 cursor-pointer"
-      style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%, -50%) scale(${inverseScale})` }}
-    >
-      <div className="px-2 py-1 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-sm text-[10px] font-bold text-gray-700 flex items-center gap-1 group-hover:border-teal-500 group-hover:shadow-md transition-all">
-        <Truck size={12} className={color} />
-        {title}
-      </div>
-
-      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-max p-2 bg-white/95 backdrop-blur-sm border border-gray-200 rounded shadow-lg text-[10px] text-gray-700 pointer-events-none">
-        {children}
-      </div>
-    </div>
-  );
-};
 
 const NavItem = ({ icon, label, active, badge, onClick }) => (
   <button
