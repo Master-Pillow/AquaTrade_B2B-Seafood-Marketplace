@@ -141,9 +141,9 @@ export default function RegisterPage() {
 
             <header className="md:hidden w-full h-20 aqua-gradient flex items-center px-4">
                 <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[#71f8e4] text-3xl">
-            waves
-          </span>
+                    <span className="material-symbols-outlined text-[#71f8e4] text-3xl">
+                        waves
+                    </span>
                     <span className="text-2xl text-white font-bold">AquaTrade</span>
                 </div>
             </header>
@@ -161,9 +161,9 @@ export default function RegisterPage() {
 
                                 {error && (
                                     <div className="mt-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-start gap-3">
-                    <span className="material-symbols-outlined text-[20px]">
-                      error
-                    </span>
+                                        <span className="material-symbols-outlined text-[20px]">
+                                            error
+                                        </span>
                                         <p className="text-sm font-medium">{error}</p>
                                     </div>
                                 )}
@@ -229,21 +229,21 @@ export default function RegisterPage() {
 
                     <div className="mt-8 flex flex-wrap justify-center gap-6 px-4">
                         <div className="flex items-center gap-1.5 opacity-60">
-              <span className="material-symbols-outlined text-[18px]">
-                verified_user
-              </span>
+                            <span className="material-symbols-outlined text-[18px]">
+                                verified_user
+                            </span>
                             <span className="text-[12px] font-semibold uppercase tracking-wider">
-                SSL Secured
-              </span>
+                                SSL Secured
+                            </span>
                         </div>
 
                         <div className="flex items-center gap-1.5 opacity-60">
-              <span className="material-symbols-outlined text-[18px]">
-                gavel
-              </span>
+                            <span className="material-symbols-outlined text-[18px]">
+                                gavel
+                            </span>
                             <span className="text-[12px] font-semibold uppercase tracking-wider">
-                Compliance ready
-              </span>
+                                Compliance ready
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -290,30 +290,27 @@ function StepBar({ steps, currentStep }) {
                         <div key={label} className="flex-1 relative">
                             <div className="flex items-center">
                                 <div
-                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold z-10 ${
-                                        completed
+                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold z-10 ${completed
                                             ? "bg-[#00796B] text-white"
                                             : active
                                                 ? "bg-[#00796B] text-white"
                                                 : "bg-white border-2 border-gray-300 text-gray-400"
-                                    }`}
+                                        }`}
                                 >
                                     {completed ? "✓" : stepNumber}
                                 </div>
 
                                 {index < steps.length - 1 && (
                                     <div
-                                        className={`h-[2px] flex-1 ${
-                                            completed ? "bg-[#00796B]" : "bg-gray-300"
-                                        }`}
+                                        className={`h-[2px] flex-1 ${completed ? "bg-[#00796B]" : "bg-gray-300"
+                                            }`}
                                     />
                                 )}
                             </div>
 
                             <p
-                                className={`mt-2 text-xs font-semibold ${
-                                    active || completed ? "text-[#00796B]" : "text-gray-500"
-                                }`}
+                                className={`mt-2 text-xs font-semibold ${active || completed ? "text-[#00796B]" : "text-gray-500"
+                                    }`}
                             >
                                 {label}
                             </p>
@@ -557,41 +554,37 @@ function RoleCard({ icon, title, desc, value, selected, onChange }) {
             <motion.div
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className={`h-full border-2 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden flex flex-col ${
-                    selected
+                className={`h-full border-2 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden flex flex-col ${selected
                         ? "border-[#00796B] bg-gradient-to-br from-teal-50 to-white shadow-lg shadow-teal-500/10"
                         : "border-gray-200 bg-white hover:border-teal-300 hover:shadow-md"
-                }`}
+                    }`}
             >
                 {/* Background ambient glow when selected */}
                 {selected && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.4 }}
                         className="absolute -right-10 -top-10 w-32 h-32 bg-teal-200/50 rounded-full blur-3xl pointer-events-none"
                     />
                 )}
-                
+
                 <div className="flex justify-between items-start mb-6 relative z-10">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
-                        selected ? "bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-md shadow-teal-500/30" : "bg-gray-100/80 text-gray-500 group-hover:bg-teal-50 group-hover:text-teal-600"
-                    }`}>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-300 ${selected ? "bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-md shadow-teal-500/30" : "bg-gray-100/80 text-gray-500 group-hover:bg-teal-50 group-hover:text-teal-600"
+                        }`}>
                         <span className="material-symbols-outlined text-[28px]">{icon}</span>
                     </div>
-                    
+
                     {/* Checkmark circle */}
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-                        selected ? "border-teal-500 bg-teal-500 text-white scale-110" : "border-gray-300 text-transparent"
-                    }`}>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${selected ? "border-teal-500 bg-teal-500 text-white scale-110" : "border-gray-300 text-transparent"
+                        }`}>
                         <span className="material-symbols-outlined text-[14px] font-bold" style={{ opacity: selected ? 1 : 0 }}>check</span>
                     </div>
                 </div>
 
                 <div className="relative z-10 flex-1 flex flex-col justify-end">
-                    <h3 className={`text-xl font-bold mb-2 transition-colors duration-300 ${
-                        selected ? "text-[#00796B]" : "text-gray-800"
-                    }`}>{title}</h3>
+                    <h3 className={`text-xl font-bold mb-2 transition-colors duration-300 ${selected ? "text-[#00796B]" : "text-gray-800"
+                        }`}>{title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed font-medium">{desc}</p>
                 </div>
             </motion.div>
@@ -600,15 +593,15 @@ function RoleCard({ icon, title, desc, value, selected, onChange }) {
 }
 
 function AccountStep({
-                         form,
-                         handleChange,
-                         showPassword,
-                         setShowPassword,
-                         showConfirmPassword,
-                         setShowConfirmPassword,
-                         passwordChecks,
-                         strengthCount,
-                     }) {
+    form,
+    handleChange,
+    showPassword,
+    setShowPassword,
+    showConfirmPassword,
+    setShowConfirmPassword,
+    passwordChecks,
+    strengthCount,
+}) {
     return (
         <div className="space-y-5">
             <Input
@@ -632,19 +625,16 @@ function AccountStep({
             <div>
                 <div className="grid grid-cols-3 gap-2 mb-1">
                     <div
-                        className={`h-1 rounded-full ${
-                            strengthCount >= 1 ? "bg-red-400" : "bg-gray-200"
-                        }`}
+                        className={`h-1 rounded-full ${strengthCount >= 1 ? "bg-red-400" : "bg-gray-200"
+                            }`}
                     />
                     <div
-                        className={`h-1 rounded-full ${
-                            strengthCount >= 3 ? "bg-yellow-400" : "bg-gray-200"
-                        }`}
+                        className={`h-1 rounded-full ${strengthCount >= 3 ? "bg-yellow-400" : "bg-gray-200"
+                            }`}
                     />
                     <div
-                        className={`h-1 rounded-full ${
-                            strengthCount >= 5 ? "bg-green-500" : "bg-gray-200"
-                        }`}
+                        className={`h-1 rounded-full ${strengthCount >= 5 ? "bg-green-500" : "bg-gray-200"
+                            }`}
                     />
                 </div>
 
@@ -684,9 +674,9 @@ function SuccessStep({ form }) {
     return (
         <div className="text-center">
             <div className="w-20 h-20 mx-auto rounded-full bg-teal-50 flex items-center justify-center mb-6">
-        <span className="material-symbols-outlined text-[#00796B] text-4xl">
-          check_circle
-        </span>
+                <span className="material-symbols-outlined text-[#00796B] text-4xl">
+                    check_circle
+                </span>
             </div>
 
             <h1 className="text-[28px] font-bold text-gray-800 mb-4">
@@ -769,14 +759,14 @@ function Input({ label, name, value, onChange, placeholder, type = "text" }) {
 }
 
 function PasswordInput({
-                           label,
-                           name,
-                           value,
-                           onChange,
-                           placeholder,
-                           show,
-                           onToggle,
-                       }) {
+    label,
+    name,
+    value,
+    onChange,
+    placeholder,
+    show,
+    onToggle,
+}) {
     return (
         <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -798,9 +788,9 @@ function PasswordInput({
                     onClick={onToggle}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-          <span className="material-symbols-outlined">
-            {show ? "visibility_off" : "visibility"}
-          </span>
+                    <span className="material-symbols-outlined">
+                        {show ? "visibility_off" : "visibility"}
+                    </span>
                 </button>
             </div>
         </div>
@@ -863,9 +853,9 @@ function FileUpload({ label, name, file, onChange, accept, note }) {
             </label>
 
             <label className="w-full h-32 border border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition">
-        <span className="material-symbols-outlined text-gray-500 text-3xl mb-2">
-          upload_file
-        </span>
+                <span className="material-symbols-outlined text-gray-500 text-3xl mb-2">
+                    upload_file
+                </span>
 
                 <p className="text-sm text-gray-500">
                     Kéo thả file vào đây hoặc{" "}
@@ -895,15 +885,14 @@ function FileUpload({ label, name, file, onChange, accept, note }) {
 function CheckItem({ checked, text }) {
     return (
         <div className="flex items-center gap-2 text-sm text-gray-600">
-      <span
-          className={`w-4 h-4 rounded-full border flex items-center justify-center text-[10px] ${
-              checked
-                  ? "bg-[#00796B] border-[#00796B] text-white"
-                  : "border-gray-400"
-          }`}
-      >
-        {checked ? "✓" : ""}
-      </span>
+            <span
+                className={`w-4 h-4 rounded-full border flex items-center justify-center text-[10px] ${checked
+                        ? "bg-[#00796B] border-[#00796B] text-white"
+                        : "border-gray-400"
+                    }`}
+            >
+                {checked ? "✓" : ""}
+            </span>
             {text}
         </div>
     );
@@ -919,9 +908,9 @@ function AuthBrandPanel() {
 
             <div className="z-10 max-w-md">
                 <div className="flex items-center gap-3 mb-8">
-          <span className="material-symbols-outlined text-[#71f8e4] text-4xl">
-            waves
-          </span>
+                    <span className="material-symbols-outlined text-[#71f8e4] text-4xl">
+                        waves
+                    </span>
                     <h1 className="text-5xl font-bold tracking-tight">AquaTrade</h1>
                 </div>
 
@@ -979,7 +968,7 @@ function MapEvents({ setPosition, setAddress, setIsPinning }) {
             const { lat, lng } = e.latlng;
             setPosition([lat, lng]);
             setIsPinning(true);
-            
+
             // Reverse Geocoding with Nominatim API
             fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
                 .then(res => res.json())
@@ -1012,7 +1001,7 @@ function MapPickerModal({ isOpen, onClose, onSelect }) {
     const [position, setPosition] = useState([10.762622, 106.660172]); // Default: HCM City
     const [address, setAddress] = useState("Vui lòng click trên bản đồ để chọn vị trí");
     const [isPinning, setIsPinning] = useState(false);
-    
+
     const [searchQuery, setSearchQuery] = useState("");
     const [isSearching, setIsSearching] = useState(false);
 
@@ -1021,17 +1010,17 @@ function MapPickerModal({ isOpen, onClose, onSelect }) {
     const handleSearch = async (e) => {
         e?.preventDefault();
         if (!searchQuery.trim()) return;
-        
+
         setIsSearching(true);
         try {
             const res = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(searchQuery)}`);
             const data = await res.json();
-            
+
             if (data && data.length > 0) {
                 const firstResult = data[0];
                 const lat = parseFloat(firstResult.lat);
                 const lon = parseFloat(firstResult.lon);
-                
+
                 setPosition([lat, lon]);
                 setAddress(firstResult.display_name);
             } else {
@@ -1057,20 +1046,20 @@ function MapPickerModal({ isOpen, onClose, onSelect }) {
                         <span className="material-symbols-outlined">close</span>
                     </button>
                 </div>
-                
+
                 <form onSubmit={handleSearch} className="p-4 flex gap-3 border-b border-gray-100">
                     <div className="relative flex-1">
                         <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Nhập tên đường, quận, thành phố để tìm kiếm..." 
-                            className="w-full pl-10 pr-4 py-2.5 bg-gray-100 border-none rounded-lg focus:ring-2 focus:ring-teal-500 outline-none" 
+                            placeholder="Nhập tên đường, quận, thành phố để tìm kiếm..."
+                            className="w-full pl-10 pr-4 py-2.5 bg-gray-100 border-none rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                         />
                     </div>
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         disabled={isSearching}
                         className="px-6 py-2.5 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700 flex items-center gap-2 disabled:bg-teal-400 transition"
                     >
@@ -1105,9 +1094,9 @@ function MapPickerModal({ isOpen, onClose, onSelect }) {
                         <button type="button" onClick={onClose} className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium transition">
                             Hủy
                         </button>
-                        <button 
+                        <button
                             type="button"
-                            onClick={() => onSelect(address)} 
+                            onClick={() => onSelect(address)}
                             disabled={isPinning || address === "Vui lòng click trên bản đồ để chọn vị trí"}
                             className={`px-6 py-2.5 text-white rounded-lg font-semibold transition flex items-center gap-2 ${(isPinning || address === "Vui lòng click trên bản đồ để chọn vị trí") ? 'bg-teal-400 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-700'}`}
                         >
